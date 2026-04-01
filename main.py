@@ -1,14 +1,14 @@
 import os
 import asyncio
+import random
 from pyrogram import Client
 
-# Environment variables orqali ma'lumotlarni olish
+# Environment variables
 API_ID = int(os.environ.get("API_ID"))
 API_HASH = os.environ.get("API_HASH")
 SESSION_STRING = os.environ.get("STRING_SESSION")
 
 async def main():
-    # Clientni bir marta yaratamiz
     app = Client(
         "my_account", 
         api_id=API_ID, 
@@ -17,20 +17,70 @@ async def main():
     )
     
     async with app:
-        target_user = "@Doktorgolivud"
-        message = "Bu avtomatik yuborilgan xabar😀."
+        # Guruhlar ro'yxati
+        groups = [
+            "@YOSHI_KATTALARY", "@vodiy_tanishuvlar9", 
+            "@ajrashganlar_tanishaaa", "@Ilk_Tanishuv_chati20", 
+            "@Tanxo_12_viloyat1", "@x_2008_2007"
+        ]
         
-        print("Bot ishga tushdi...")
+        # 3 xil matnli xabarlar ro'yxati (Buni xohlagancha o'zgartirishingiz mumkin)
+        messages = [
+            "Salom, jonim... profilimga bir kiring... 🌹😻
+Yopiq kanalda siz kutgan eng yangi videolarim bor... 🔞🍒🔥",
+"𝒮𝒶𝓁ℴ𝓂, 𝓅𝓇ℴ𝒻𝒾𝓁𝒾𝓂ℊ𝒶 𝓀𝒾𝓇𝒾𝒷 𝓀ℴ'𝓇𝒾𝓃ℊ... 🫦✨
+𝒴ℴ𝓅𝒾𝓆 𝓀𝒶𝓃𝒶𝓁𝒹𝒶 𝒻𝒶𝓆𝒶𝓉 𝓈𝒾𝓏 𝓊𝒸𝒽𝓊𝓃 𝓎𝒶𝓃ℊ𝒾 𝓋𝒾𝒹𝑒ℴ𝓁𝒶𝓇𝒾𝓂 𝒷ℴ𝓇... 🔥🔞❤️‍🔥",
+            "𝓢𝓪𝓵𝓸𝓶, 𝓳𝓸𝓷𝓲𝓶... 𝓹𝓻𝓸𝓯𝓲𝓵𝓲𝓶𝓰𝓪 𝓴𝓲𝓻𝓲𝓫 𝓴𝓸'𝓻𝓲𝓷𝓰 🙈🌹
+𝓨𝓸𝓹𝓲𝓿 𝓴𝓪𝓷𝓪𝓵𝓭𝓪 𝔂𝓪𝓷𝓰𝓲, 𝓮𝓱𝓽𝓲𝓻𝓸𝓼𝓵𝓲 𝓿𝓲𝓭𝓮𝓸𝓵𝓪𝓻𝓲𝓂 𝓫𝓸𝓻, 𝓼𝓲𝔃𝓷𝓲 𝓴𝓾𝓽𝔂𝓪𝓹𝓶𝓪𝓷... 🔞🍓🔥✨",
+            "Zerikkanlar bormi? Gaplashamiz! Profildagi guruxga o'ting😍🔞🫦"
+        ]
         
-        while True:  # To'xtovsiz takrorlash uchun
-            try:
-                await app.send_message(target_user, message)
-                print(f"Xabar {target_user} ga muvaffaqiyatli yuborildi!")
-            except Exception as e:
-                print(f"Xatolik yuz berdi: {e}")
+        # Javob berilgan odamlar xotirasi
+        replied_users = {group: [] for group in groups}
+        
+        print("Bot ishga tushdi. Random xabarlar rejimi faol! ✅")
+        
+        while True:
+            for group in groups:
+                try:
+                    # 1. Ro'yxatdan tasodifiy bitta matnni tanlab olamiz
+                    current_message = random.choice(messages)
+                    
+                    # 2. Oxirgi xabarlarni tekshirish
+                    recent_messages = []
+                    async for msg in app.get_chat_history(group, limit=30):
+                        recent_messages.append(msg)
+                    
+                    # 3. Yangi foydalanuvchini qidirish
+                    valid_messages = [
+                        m for m in recent_messages 
+                        if m.from_user and not m.from_user.is_self and not m.from_user.is_bot 
+                        and m.from_user.id not in replied_users[group]
+                    ]
+                    
+                    if valid_messages:
+                        # AGAR YANGI ODAM TOPILSA - REPLY QILAMIZ
+                        chosen_msg = random.choice(valid_messages)
+                        await chosen_msg.reply_text(current_message)
+                        print(f"[{group}] - {chosen_msg.from_user.first_name} ga REPLY yuborildi. Matn: {current_message}")
+                        
+                        # Xotiraga qo'shish
+                        replied_users[group].append(chosen_msg.from_user.id)
+                        if len(replied_users[group]) > 20:
+                            replied_users[group].pop(0)
+                    else:
+                        # AGAR YANGI ODAM TOPILMASA - ODDIY XABAR
+                        await app.send_message(group, current_message)
+                        print(f"[{group}] - Yangi odam yo'q, ODDIY xabar ketdi. Matn: {current_message}")
+                    
+                except Exception as e:
+                    print(f"Xatolik yuz berdi ({group}): {e}")
+                
+                # Guruhlar orasida 3 soniya kutish
+                await asyncio.sleep(3)
             
-            # 60 soniya (1 daqiqa) kutish
-            await asyncio.sleep(60)
+            print("Sikl tugadi. 3 daqiqa (180 sek) tanaffus... 💤")
+            await asyncio.sleep(180)
 
 if __name__ == "__main__":
     try:
