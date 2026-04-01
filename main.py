@@ -84,7 +84,7 @@ Yopiq kanalda siz kutgan eng yangi videolarim bor... 🍒🔥""",
             
             print("Sikl tugadi. 10 daqiqa (600 sek) tanaffus boshlandi... 💤")
             # 10 daqiqalik tanaffus (600 soniya)
-            await asyncio.sleep(10)
+            await asyncio.sleep(20)
 
 if __name__ == "__main__":
     try:
