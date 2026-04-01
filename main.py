@@ -41,7 +41,7 @@ Yopiq kanalda siz kutgan eng yangi videolarim bor... 🍒🔥""",
         # Javob berilgan odamlar xotirasi
         replied_users = {group: [] for group in groups}
         
-        print("Bot ishga tushdi. Random xabarlar va 10 daqiqalik tanaffus faol! ✅")
+        print("Bot ishga tushdi. Random xabarlar va 5 daqiqalik tanaffus faol! ✅")
         
         while True:
             for group in groups:
@@ -83,8 +83,8 @@ Yopiq kanalda siz kutgan eng yangi videolarim bor... 🍒🔥""",
                 await asyncio.sleep(3)
             
             print("Sikl tugadi. 10 daqiqa (600 sek) tanaffus boshlandi... 💤")
-            # 10 daqiqalik tanaffus (600 soniya)
-            await asyncio.sleep(20)
+            # 5 daqiqalik tanaffus (300 soniya)
+            await asyncio.sleep(300)
 
 if __name__ == "__main__":
     try:
