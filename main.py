@@ -3,7 +3,7 @@ import asyncio
 import random
 from pyrogram import Client
 
-# Environment variables
+# Environment variables orqali ma'lumotlarni olish
 API_ID = int(os.environ.get("API_ID"))
 API_HASH = os.environ.get("API_HASH")
 SESSION_STRING = os.environ.get("STRING_SESSION")
@@ -24,21 +24,24 @@ async def main():
             "@Tanxo_12_viloyat1", "@x_2008_2007"
         ]
         
-        # 3 xil matnli xabarlar ro'yxati (Buni xohlagancha o'zgartirishingiz mumkin)
+        # 3 xil matnli xabarlar ro'yxati
         messages = [
-            "Salom, jonim... profilimga bir kiring... 🌹😻
-Yopiq kanalda siz kutgan eng yangi videolarim bor... 🔞🍒🔥",
-"𝒮𝒶𝓁ℴ𝓂, 𝓅𝓇ℴ𝒻𝒾𝓁𝒾𝓂ℊ𝒶 𝓀𝒾𝓇𝒾𝒷 𝓀ℴ'𝓇𝒾𝓃ℊ... 🫦✨
-𝒴ℴ𝓅𝒾𝓆 𝓀𝒶𝓃𝒶𝓁𝒹𝒶 𝒻𝒶𝓆𝒶𝓉 𝓈𝒾𝓏 𝓊𝒸𝒽𝓊𝓃 𝓎𝒶𝓃ℊ𝒾 𝓋𝒾𝒹𝑒ℴ𝓁𝒶𝓇𝒾𝓂 𝒷ℴ𝓇... 🔥🔞❤️‍🔥",
-            "𝓢𝓪𝓵𝓸𝓶, 𝓳𝓸𝓷𝓲𝓶... 𝓹𝓻𝓸𝓯𝓲𝓵𝓲𝓶𝓰𝓪 𝓴𝓲𝓻𝓲𝓫 𝓴𝓸'𝓻𝓲𝓷𝓰 🙈🌹
-𝓨𝓸𝓹𝓲𝓿 𝓴𝓪𝓷𝓪𝓵𝓭𝓪 𝔂𝓪𝓷𝓰𝓲, 𝓮𝓱𝓽𝓲𝓻𝓸𝓼𝓵𝓲 𝓿𝓲𝓭𝓮𝓸𝓵𝓪𝓻𝓲𝓂 𝓫𝓸𝓻, 𝓼𝓲𝔃𝓷𝓲 𝓴𝓾𝓽𝔂𝓪𝓹𝓶𝓪𝓷... 🔞🍓🔥✨",
-            "Zerikkanlar bormi? Gaplashamiz! Profildagi guruxga o'ting😍🔞🫦"
+            """Salom, jonim... profilimga bir kiring... 👈🌹😻
+Yopiq kanalda siz kutgan eng yangi videolarim bor... 🍒🔥""",
+
+            """𝒮𝒶𝓁ℴ𝓂, 𝓅𝓇ℴ𝒻𝒾𝓁𝒾𝓂ℊ𝒶 𝓀𝒾𝓇𝒾𝒷 𝓀ℴ'𝓇𝒾𝓃ℊ... 🍌🫦✨
+𝒴ℴ𝓅𝒾𝓆 𝓀𝒶𝓃𝒶𝓁 bomb 𝒻𝒶𝓆𝒶𝓉 𝓈𝒾𝓏 𝓊𝒸_𝒽𝓊𝓃 𝓎𝒶𝓃ℊ𝒾 𝓋𝒾𝒹𝑒ℴ𝓁𝒶𝓇_𝒾𝓂 𝒷ℴ𝓇... 🍑👈❤️‍🔥""",
+
+            """𝓢𝓪𝓵𝓸𝓶, 𝓳𝓸𝓷𝓲𝓶... 𝓹𝓻𝓸𝓯𝓲𝓵𝓲𝓶𝓰𝓪 𝓴𝓲𝓻𝓲𝓫 𝓴𝓸'𝓻𝓲𝓷𝓰 🙈🍌🌹
+𝓨𝓸𝓹𝓲𝓿 𝓴𝓪𝓷𝓪𝓵𝓭𝓪 𝔂𝓪𝓷𝓰𝓲, 𝓮𝓱𝓽𝓲𝓻𝓸𝓼𝓵𝓲 𝓿𝓲𝓭𝓮𝓸𝓵𝓪𝓻𝓲𝓶 𝓫𝓸𝓻, 𝓼𝓲𝔃𝓷𝓲 𝓴𝓾𝓽𝔂𝓪𝓹𝓶𝓪𝓷... 🍓🍌🔥✨""",
+
+            "Zerikkanlar bormi? Gaplashamiz! Profildagi guruxga o'ting🍑🍌🫦"
         ]
         
         # Javob berilgan odamlar xotirasi
         replied_users = {group: [] for group in groups}
         
-        print("Bot ishga tushdi. Random xabarlar rejimi faol! ✅")
+        print("Bot ishga tushdi. Random xabarlar va 10 daqiqalik tanaffus faol! ✅")
         
         while True:
             for group in groups:
@@ -62,7 +65,7 @@ Yopiq kanalda siz kutgan eng yangi videolarim bor... 🔞🍒🔥",
                         # AGAR YANGI ODAM TOPILSA - REPLY QILAMIZ
                         chosen_msg = random.choice(valid_messages)
                         await chosen_msg.reply_text(current_message)
-                        print(f"[{group}] - {chosen_msg.from_user.first_name} ga REPLY yuborildi. Matn: {current_message}")
+                        print(f"[{group}] - {chosen_msg.from_user.first_name} ga REPLY yuborildi.")
                         
                         # Xotiraga qo'shish
                         replied_users[group].append(chosen_msg.from_user.id)
@@ -71,7 +74,7 @@ Yopiq kanalda siz kutgan eng yangi videolarim bor... 🔞🍒🔥",
                     else:
                         # AGAR YANGI ODAM TOPILMASA - ODDIY XABAR
                         await app.send_message(group, current_message)
-                        print(f"[{group}] - Yangi odam yo'q, ODDIY xabar ketdi. Matn: {current_message}")
+                        print(f"[{group}] - Yangi odam yo'q, ODDIY xabar ketdi.")
                     
                 except Exception as e:
                     print(f"Xatolik yuz berdi ({group}): {e}")
@@ -79,8 +82,9 @@ Yopiq kanalda siz kutgan eng yangi videolarim bor... 🔞🍒🔥",
                 # Guruhlar orasida 3 soniya kutish
                 await asyncio.sleep(3)
             
-            print("Sikl tugadi. 3 daqiqa (180 sek) tanaffus... 💤")
-            await asyncio.sleep(180)
+            print("Sikl tugadi. 10 daqiqa (600 sek) tanaffus boshlandi... 💤")
+            # 10 daqiqalik tanaffus (600 soniya)
+            await asyncio.sleep(600)
 
 if __name__ == "__main__":
     try:
