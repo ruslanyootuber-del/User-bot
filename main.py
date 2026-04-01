@@ -11,7 +11,7 @@ async def main():
     async with Client("my_account", api_id=api_id, api_hash=api_hash, session_string=session_string) as app:
         # Xabar yuboriladigan user va xabar matni
         target_user = "@Doktorgolivud"
-        message = "Assalomu alaykum! Bu avtomatik yuborilgan xabar."
+        message = "Bu avtomatik yuborilgan xabar😀."
         
         try:
             await app.send_message(target_user, message)
