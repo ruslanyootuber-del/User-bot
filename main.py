@@ -21,7 +21,7 @@ async def main():
         groups = [
             "@YOSHI_KATTALARY", "@vodiy_tanishuvlar9", 
             "@ajrashganlar_tanishaaa",  "@Ilk_Tanishuv_chati20", 
-            "@Tanxo_12_viloyat1", "@x_2008_2007", "@uchrashuv_ilk"
+            "@Tanxo_12_viloyat1", "@a_2005_2004", "@x_2008_2007", "@uchrashuv_ilk"
         ]
         
         # 3 xil matnli xabarlar ro'yxati
