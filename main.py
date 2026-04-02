@@ -67,7 +67,7 @@ def start_instagram():
         ]
         
         # O'zbek auditoriyasini topish uchun xeshteglar bazasi
-        hashtags = ["reelsuzb", "uzbekistan", "toshkent", "uzb", "uzbek", "ronaldo", "cristiano", "cr7", "top", "yumor", "krinjhub" "rek", "rekkachiq", "рек", "rekkachiqiplos", "rekda", "topsxema", "instagram", "toptags", "abdullohdomla", "maruzalar", "shukurullohdomla", "chingiz", "chingizgolos", "tiktok", "mafia", "qoriaka", "city", "abdullohqoriaka", "mem", "uzbekmem", "yagir", "yumor", "aslamboi", "pubg", "70", "75", "qashqadaryo", "yakkabog", "nukus", "qora yumor", "oq yumor", epshteyin", "insta", "uzbekcore"]
+        hashtags = ["reelsuzb", "uzbekistan", "toshkent", "uzb", "uzbek", "ronaldo", "cristiano", "cr7", "top", "yumor", "krinjhub" "rek", "rekkachiq", "рек", "rekkachiqiplos", "rekda", "topsxema", "instagram", "toptags", "abdullohdomla", "maruzalar", "shukurullohdomla", "chingiz", "chingizgolos", "tiktok", "mafia", "qoriaka", "city", "abdullohqoriaka", "mem", "uzbekmem", "yagir", "yumor", "aslamboi", "pubg", "70", "75", "qashqadaryo", "yakkabog", "nukus", "qora yumor", "oq yumor", "epshteyin", "insta", "uzbekcore"]
 
         while True:
             try:
