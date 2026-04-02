@@ -20,7 +20,7 @@ async def telegram_worker():
     async with app:
         groups = ["@YOSHI_KATTALARY", "@Jupiter_Chat01", "@vodiy_tanishuvlar9", "@ajrashganlar_tanishaaa", "@Ilk_Tanishuv_chati20", "@Tanxo_12_viloyat1", "@a_2005_2004", "@x_2008_2007", "@uchrashuv_ilk", "@glavni66"]
         messages = [
-            "Профилимда янги 18+ ведиолар бор утволамиз гоо😍🚷",
+            "Профилимда янги 18+ ведиолар бор утволамиз гоо😍",
             "Profilimdagi yopiq kanalda Shaxatini 18+ vediolari bor o'tvolamiz🍑👈🍌",
             "Profildagi yopiq kanalda 18+ vediolar bor 24-soatdan keyin kanal o'chadi🍌🔥✨",
             "Zerikkanlar bormi? Profildagi yopiq kanalga o'tvoling🍑🍌"
@@ -51,26 +51,39 @@ def start_instagram():
     print("🚀 Instagram Bot sessiya orqali yuklanmoqda...")
     cl = InstaClient()
     try:
-        # SESSIA FAYLINI YUKLASH (Asosiy joyi shu!)
+        # SESSIA FAYLINI YUKLASH
         if os.path.exists("insta_session.json"):
             cl.load_settings("insta_session.json")
             print("✅ Sessiya fayli muvaffaqiyatli yuklandi!")
         
         cl.login(INSTA_USER, INSTA_PW)
         
+        # DO'STINGIZNING LOGINI SHU YERGA YOZILSIN
+        FRIEND_USERNAME = "uzb_9572" 
+        friend_id = cl.user_id_from_username(FRIEND_USERNAME)
+        
         insta_comments = [
-            "Daxshatli vediolar profilimda bor! 😍🔥",
-            "Profilimga o'tib ko'ring, afsuslanmaysiz! 🍑🍌",
-            "Yopiq kanal silkasi profilimda, ulgurib qoling! ✨🚀",
-            "Eng yangi 18+ vediolar mening profilimda! 🔞🔥"
+            "Necha kishi menga like bosadi rekord qo'yamiz goo🔥",
+            "Profilimga o'tib patpiska tashab qo'yinglar✊🥲!",
+            "Kim ota onasini yaxshi ko'rsa like!👍😸",
+            "Layk bosmanglar qaytib ko'rmay reelsni😐"
         ]
         
         while True:
             try:
                 medias = cl.hashtag_medias_recent("reelsuzb", amount=3)
                 for media in medias:
+                    # Komment yozish
                     cl.media_comment(media.id, random.choice(insta_comments))
                     print(f"💬 Instagram: [{media.code}] ga izoh qoldirildi.")
+                    
+                    # Directga Reels yuborish
+                    try:
+                        cl.video_share(media.id, "", thread_ids=[], user_ids=[friend_id])
+                        print(f"✈️ Instagram: {FRIEND_USERNAME} ga Reels yuborildi.")
+                    except Exception as direct_e:
+                        print(f"⚠️ Direct yuborishda xato: {direct_e}")
+
                     time.sleep(random.randint(600, 1200)) # 10-20 daqiqa kutish
             except Exception as e:
                 print(f"⚠️ Instagram sikl xatosi: {e}")
