@@ -26,11 +26,11 @@ async def main():
         
         # 3 xil matnli xabarlar ro'yxati
         messages = [
-            """Профилимда янги секс ведиолар бор утволамиз гоо😍🚷""",
+            """Профилимда янги Xxx ведиолар бор утволамиз гоо😍🚷""",
 
-            """Profilimdagi yopiq kanalda Shaxatini seks vediolari bor o'tvolamiz🍑👈🍌""",
+            """Profilimdagi yopiq kanalda Shaxatini Xxx vediolari bor o'tvolamiz🍑👈🍌""",
 
-            """Profildagi yopiq kanalda 18+ vediolar bor 24-soatdan keyin kanal o'chadi🍌🔥✨""",
+            """Profildagi yopiq kanalda Xxx vediolar bor 24-soatdan keyin kanal o'chadi🍌🔥✨""",
 
             "Zerikkanlar bormi? Profildagi yopiq kanalga o'tvoling🍑🍌"
         ]
