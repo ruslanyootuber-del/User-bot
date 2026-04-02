@@ -21,21 +21,18 @@ async def main():
         groups = [
             "@YOSHI_KATTALARY", "@vodiy_tanishuvlar9", 
             "@ajrashganlar_tanishaaa",  "@Ilk_Tanishuv_chati20", 
-            "@Tanxo_12_viloyat1", "@x_2008_2007"
+            "@Tanxo_12_viloyat1", "@x_2008_2007", "@uchrashuv_ilk"
         ]
         
         # 3 xil matnli xabarlar ro'yxati
         messages = [
-            """Salom, jonim... profilimga bir kiring... 👈🌹😻
-Yopiq kanalda siz kutgan eng yangi videolarim bor... 🍒🔥""",
+            """Профилимда янги секс ведиолар бор утволамиз гоо😍🚷""",
 
-            """𝒮𝒶𝓁ℴ𝓂, 𝓅𝓇ℴ𝒻𝒾𝓁𝒾𝓂ℊ𝒶 𝓀𝒾𝓇𝒾𝒷 𝓀ℴ'𝓇𝒾𝓃ℊ... 🍌🫦✨
-𝒴ℴ𝓅𝒾𝓆 𝓀𝒶𝓃𝒶𝓁 bomb 𝒻𝒶𝓆𝒶𝓉 𝓈𝒾𝓏 𝓊𝒸_𝒽𝓊𝓃 𝓎𝒶𝓃ℊ𝒾 𝓋𝒾𝒹𝑒ℴ𝓁𝒶𝓇_𝒾𝓂 𝒷ℴ𝓇... 🍑👈❤️‍🔥""",
+            """Profilimdagi yopiq kanalda Shaxatini seks vediolari bor o'tvolamiz🍑👈🍌""",
 
-            """𝓢𝓪𝓵𝓸𝓶, 𝓳𝓸𝓷𝓲𝓶... 𝓹𝓻𝓸𝓯𝓲𝓵𝓲𝓶𝓰𝓪 𝓴𝓲𝓻𝓲𝓫 𝓴𝓸'𝓻𝓲𝓷𝓰 🙈🍌🌹
-𝓨𝓸𝓹𝓲𝓿 𝓴𝓪𝓷𝓪𝓵𝓭𝓪 𝔂𝓪𝓷𝓰𝓲, 𝓮𝓱𝓽𝓲𝓻𝓸𝓼𝓵𝓲 𝓿𝓲𝓭𝓮𝓸𝓵𝓪𝓻𝓲𝓶 𝓫𝓸𝓻, 𝓼𝓲𝔃𝓷𝓲 𝓴𝓾𝓽𝔂𝓪𝓹𝓶𝓪𝓷... 🍓🍌🔥✨""",
+            """Profildagi yopiq kanalda 18+ vediolar bor 24-soatdan keyin kanal o'chadi🍌🔥✨""",
 
-            "Zerikkanlar bormi? Gaplashamiz! Profildagi guruxga o'ting🍑🍌🫦"
+            "Zerikkanlar bormi? Profildagi yopiq kanalga o'tvoling🍑🍌"
         ]
         
         # Javob berilgan odamlar xotirasi
