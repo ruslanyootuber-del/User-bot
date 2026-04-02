@@ -59,7 +59,7 @@ def start_instagram():
         cl.login(INSTA_USER, INSTA_PW)
         
         # DO'STINGIZNING LOGINI SHU YERGA YOZILSIN
-        FRIEND_USERNAME = "uzb_9577" 
+        FRIEND_USERNAME = "@uzb_9577" 
         friend_id = cl.user_id_from_username(FRIEND_USERNAME)
         
         insta_comments = [
