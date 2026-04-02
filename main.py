@@ -48,19 +48,21 @@ async def telegram_worker():
 
 # --- INSTAGRAM BOT QISMI ---
 def start_instagram():
-    print("🚀 Instagram Bot sessiya orqali yuklanmoqda...")
+    print("🚀 Instagram Bot ishga tushmoqda...")
     cl = InstaClient()
+    processed_reels = [] # Avval yozilgan Reels'larni eslab qolish uchun
+
     try:
-        # SESSIA FAYLINI YUKLASH
         if os.path.exists("insta_session.json"):
             cl.load_settings("insta_session.json")
-            print("✅ Sessiya fayli muvaffaqiyatli yuklandi!")
+            print("✅ Sessiya yuklandi!")
         
         cl.login(INSTA_USER, INSTA_PW)
         
-        # DO'STINGIZNING LOGINI SHU YERGA YOZILSIN
-        FRIEND_USERNAME = "@uzb_9577" 
+        # DO'STINGIZNING LOGINI (@ belgisiz)
+        FRIEND_USERNAME = "uzb_9577" 
         friend_id = cl.user_id_from_username(FRIEND_USERNAME)
+        print(f"✅ Do'st topildi (ID: {friend_id})")
         
         insta_comments = [
             "Necha kishi menga like bosadi rekord qo'yamiz goo🔥",
@@ -71,23 +73,42 @@ def start_instagram():
         
         while True:
             try:
-                medias = cl.hashtag_medias_recent("reelsuzb", amount=3)
+                # Yangi 5 ta Reels'ni olish
+                medias = cl.hashtag_medias_recent("reelsuzb", amount=5)
+                
+                target_media = None
                 for media in medias:
-                    # Komment yozish
-                    cl.media_comment(media.id, random.choice(insta_comments))
-                    print(f"💬 Instagram: [{media.code}] ga izoh qoldirildi.")
+                    if media.id not in processed_reels:
+                        target_media = media
+                        break
+                
+                if target_media:
+                    # 1. Komment yozish
+                    cl.media_comment(target_media.id, random.choice(insta_comments))
+                    print(f"💬 Instagram: [{target_media.code}] ga izoh qoldirildi.")
                     
-                    # Directga Reels yuborish
+                    # 2. Directga yuborish
                     try:
-                        cl.video_share(media.id, "", thread_ids=[], user_ids=[friend_id])
+                        cl.video_share(target_media.id, "", thread_ids=[], user_ids=[friend_id])
                         print(f"✈️ Instagram: {FRIEND_USERNAME} ga Reels yuborildi.")
-                    except Exception as direct_e:
-                        print(f"⚠️ Direct yuborishda xato: {direct_e}")
+                    except Exception as de:
+                        print(f"⚠️ Direct xatosi: {de}")
+                    
+                    # IDni eslab qolish
+                    processed_reels.append(target_media.id)
+                    if len(processed_reels) > 100: processed_reels.pop(0)
 
-                    time.sleep(random.randint(600, 1200)) # 10-20 daqiqa kutish
+                else:
+                    print("🔄 Yangi Reels topilmadi, keyingi safar tekshiramiz.")
+
+                # ANIQ 10 DAQIQA KUTISH (600 soniya)
+                print("💤 10 daqiqa tanaffus...")
+                time.sleep(600)
+
             except Exception as e:
                 print(f"⚠️ Instagram sikl xatosi: {e}")
-                time.sleep(600)
+                time.sleep(60) # Xato bo'lsa 1 daqiqa kutib qayta urinish
+                
     except Exception as e:
         print(f"❌ Instagram Login xatosi: {e}")
 
