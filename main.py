@@ -60,14 +60,14 @@ def start_instagram():
         cl.login(INSTA_USER, INSTA_PW)
         
         insta_comments = [
-            "Necha kishi menga like bosadi rekord qo'yamiz goo🔥",
-            "Profilimga o'tib patpiska tashab qo'yinglar✊🥲!",
-            "Kim ota onasini yaxshi ko'rsa like!👍😸",
-            "Layk bosmanglar qaytib ko'rmay reelsni😐"
+            "@cristiano menga obuna bo‘lmaguncha to‘xtamayman! 🔥 1-kun. Maqsad aniq! 🚀",
+            "CR7 FOLLOW ME! 🐐🇵🇹 Obuna bo‘lmaguncha komentariya yozaman!🐐⚽️@cristiano",
+            "@cristiano Ronaldo menga obuna bo’lmaguncha taslim bo‘lmayman🚀✊",
+            "@cristiano Ronaldoni taslim qilaman! 😤 Menga obuna bo‘lmaguncha har kuni komentariya yozaman!⚽️🐐"
         ]
         
         # O'zbek auditoriyasini topish uchun xeshteglar bazasi
-        hashtags = ["reelsuzb", "uzbekistan", "toshkent", "uzb", "uzbek"]
+        hashtags = ["reelsuzb", "uzbekistan", "toshkent", "uzb", "uzbek", "ronaldo", "cristiano", "cr7", "top", "yumor", "krinjhub" "rek", "rekkachiq", "рек", "rekkachiqiplos", "rekda", "topsxema", "instagram", "toptags", "abdullohdomla", "maruzalar", "shukurullohdomla", "chingiz", "chingizgolos", "tiktok", "mafia", "qoriaka", "city", "abdullohqoriaka", "mem", "uzbekmem", "yagir", "yumor", "aslamboi", "pubg", "70", "75", "qashqadaryo", "yakkabog", "nukus", "qora yumor", "oq yumor", epshteyin", "insta", "uzbekcore"]
 
         while True:
             try:
