@@ -59,11 +59,6 @@ def start_instagram():
         
         cl.login(INSTA_USER, INSTA_PW)
         
-        # DO'STINGIZNING LOGINI (@ belgisiz)
-        FRIEND_USERNAME = "uzb_9577" 
-        friend_id = cl.user_id_from_username(FRIEND_USERNAME)
-        print(f"✅ Do'st topildi (ID: {friend_id})")
-        
         insta_comments = [
             "Necha kishi menga like bosadi rekord qo'yamiz goo🔥",
             "Profilimga o'tib patpiska tashab qo'yinglar✊🥲!",
@@ -71,35 +66,39 @@ def start_instagram():
             "Layk bosmanglar qaytib ko'rmay reelsni😐"
         ]
         
+        # O'zbek auditoriyasini topish uchun xeshteglar bazasi
+        hashtags = ["reelsuzb", "uzbekistan", "toshkent", "uzb", "uzbek"]
+
         while True:
             try:
-                # Yangi 5 ta Reels'ni olish
-                medias = cl.hashtag_medias_recent("reelsuzb", amount=5)
+                # Har siklda random xeshteg tanlaymiz
+                current_hashtag = random.choice(hashtags)
                 
-                target_media = None
-                for media in medias:
-                    if media.id not in processed_reels:
-                        target_media = media
-                        break
+                # Eng yangi Reels'larni kengroq miqyosda olish
+                medias = cl.hashtag_medias_recent(current_hashtag, amount=15)
                 
-                if target_media:
-                    # 1. Komment yozish
-                    cl.media_comment(target_media.id, random.choice(insta_comments))
-                    print(f"💬 Instagram: [{target_media.code}] ga izoh qoldirildi.")
+                # Oldin komment yozilmaganlarini saralab olish
+                fresh_medias = [m for m in medias if m.id not in processed_reels]
+                
+                if len(fresh_medias) >= 2:
+                    # Tasodifiy 2 ta har xil Reels tanlash
+                    targets = random.sample(fresh_medias, 2)
                     
-                    # 2. Directga yuborish
-                    try:
-                        cl.video_share(target_media.id, "", thread_ids=[], user_ids=[friend_id])
-                        print(f"✈️ Instagram: {FRIEND_USERNAME} ga Reels yuborildi.")
-                    except Exception as de:
-                        print(f"⚠️ Direct xatosi: {de}")
-                    
-                    # IDni eslab qolish
-                    processed_reels.append(target_media.id)
-                    if len(processed_reels) > 100: processed_reels.pop(0)
-
+                    for idx, target_media in enumerate(targets):
+                        # Komment yozish
+                        cl.media_comment(target_media.id, random.choice(insta_comments))
+                        print(f"💬 Instagram: [{target_media.code}] ga izoh qoldirildi (#{current_hashtag}).")
+                        
+                        # IDni eslab qolish
+                        processed_reels.append(target_media.id)
+                        if len(processed_reels) > 200: 
+                            processed_reels.pop(0) # Xotirani tozalab borish
+                        
+                        # Agar birinchi Reels bo'lsa, ikkinchisiga o'tishdan oldin 3 soniya kutish
+                        if idx == 0:
+                            time.sleep(3)
                 else:
-                    print("🔄 Yangi Reels topilmadi, keyingi safar tekshiramiz.")
+                    print(f"🔄 #{current_hashtag} bo'yicha yetarlicha yangi Reels topilmadi, keyingi safar tekshiramiz.")
 
                 # ANIQ 10 DAQIQA KUTISH (600 soniya)
                 print("💤 10 daqiqa tanaffus...")
