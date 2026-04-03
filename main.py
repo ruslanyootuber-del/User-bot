@@ -53,11 +53,22 @@ def start_instagram():
     processed_reels = [] # Avval yozilgan Reels'larni eslab qolish uchun
 
     try:
+        # Sessiyani xavfsiz yuklash yoki yaroqsiz bo'lsa yangilash
         if os.path.exists("insta_session.json"):
-            cl.load_settings("insta_session.json")
-            print("✅ Sessiya yuklandi!")
-        
-        cl.login(INSTA_USER, INSTA_PW)
+            try:
+                cl.load_settings("insta_session.json")
+                cl.login(INSTA_USER, INSTA_PW)
+                print("✅ Eski sessiya orqali ulandi!")
+            except Exception:
+                os.remove("insta_session.json")
+                print("🗑 Yaroqsiz sessiya o'chirildi, yangidan kiramiz...")
+                cl.login(INSTA_USER, INSTA_PW)
+                cl.dump_settings("insta_session.json")
+                print("✅ Yangi sessiya yaratildi!")
+        else:
+            cl.login(INSTA_USER, INSTA_PW)
+            cl.dump_settings("insta_session.json")
+            print("✅ Yangi sessiya yaratildi!")
         
         insta_comments = [
             "@cristiano menga obuna bo‘lmaguncha to‘xtamayman! 🔥 1-kun. Maqsad aniq! 🚀",
@@ -67,38 +78,63 @@ def start_instagram():
         ]
         
         # O'zbek auditoriyasini topish uchun xeshteglar bazasi
-        hashtags = ["reelsuzb", "uzbekistan", "toshkent", "uzb", "uzbek", "ronaldo", "cristiano", "cr7", "top", "yumor", "krinjhub" "rek", "rekkachiq", "рек", "rekkachiqiplos", "rekda", "topsxema", "instagram", "toptags", "abdullohdomla", "maruzalar", "shukurullohdomla", "chingiz", "chingizgolos", "tiktok", "mafia", "qoriaka", "city", "abdullohqoriaka", "mem", "uzbekmem", "yagir", "yumor", "aslamboi", "pubg", "70", "75", "qashqadaryo", "yakkabog", "nukus", "qora yumor", "oq yumor", "epshteyin", "insta", "uzbekcore"]
+        hashtags = [
+            "reelsuzb", "uzbekistan", "toshkent", "uzb", "uzbek", "ronaldo", "cristiano", "cr7", 
+            "top", "yumor", "krinjhub", "rek", "rekkachiq", "рек", "rekkachiqiplos", "rekda", 
+            "topsxema", "instagram", "toptags", "abdullohdomla", "maruzalar", "shukurullohdomla", 
+            "chingiz", "chingizgolos", "tiktok", "mafia", "qoriaka", "city", "abdullohqoriaka", 
+            "mem", "uzbekmem", "yagir", "yumor", "aslamboi", "pubg", "70", "75", "qashqadaryo", 
+            "yakkabog", "nukus", "qora yumor", "oq yumor", "epshteyin", "insta", "uzbekcore"
+        ]
 
         while True:
             try:
                 # Har siklda random xeshteg tanlaymiz
                 current_hashtag = random.choice(hashtags)
+                print(f"🔍 #{current_hashtag} bo'yicha Reels qidirilmoqda...")
                 
                 # Eng yangi Reels'larni kengroq miqyosda olish
                 medias = cl.hashtag_medias_recent(current_hashtag, amount=15)
                 
+                # Agar tag bo'yicha umuman video chiqmasa (kamdan-kam hollarda), boshqa tag tanlash
+                if not medias or len(medias) < 2:
+                    print(f"⚠️ #{current_hashtag} da yetarli video topilmadi, boshqa tagga o'tamiz...")
+                    continue
+                
                 # Oldin komment yozilmaganlarini saralab olish
                 fresh_medias = [m for m in medias if m.id not in processed_reels]
-                
+                targets = []
+
                 if len(fresh_medias) >= 2:
-                    # Tasodifiy 2 ta har xil Reels tanlash
+                    # Yangilari yetarli bo'lsa, o'shalardan 2 ta olamiz
                     targets = random.sample(fresh_medias, 2)
-                    
-                    for idx, target_media in enumerate(targets):
-                        # Komment yozish
-                        cl.media_comment(target_media.id, random.choice(insta_comments))
-                        print(f"💬 Instagram: [{target_media.code}] ga izoh qoldirildi (#{current_hashtag}).")
-                        
-                        # IDni eslab qolish
-                        processed_reels.append(target_media.id)
-                        if len(processed_reels) > 200: 
-                            processed_reels.pop(0) # Xotirani tozalab borish
-                        
-                        # Agar birinchi Reels bo'lsa, ikkinchisiga o'tishdan oldin 3 soniya kutish
-                        if idx == 0:
-                            time.sleep(3)
                 else:
-                    print(f"🔄 #{current_hashtag} bo'yicha yetarlicha yangi Reels topilmadi, keyingi safar tekshiramiz.")
+                    # YOKI to'xtab qolmaslik uchun boridan random qilib olamiz!
+                    print("🔄 Yangi Reels kam ekan, borlaridan random qilib olamiz (To'xtash yo'q!).")
+                    needed = 2 - len(fresh_medias)
+                    old_medias = [m for m in medias if m not in fresh_medias]
+                    fallback = random.sample(old_medias, min(needed, len(old_medias)))
+                    targets = fresh_medias + fallback
+
+                    # Mabodo baribir 2 ta chiqmasa, medias ichidan qaysi bo'lsa shuni olamiz
+                    if len(targets) < 2:
+                        targets = random.sample(medias, 2)
+                
+                # Komment yozish (Aniq 2 ta!)
+                for idx, target_media in enumerate(targets):
+                    cl.media_comment(target_media.id, random.choice(insta_comments))
+                    print(f"💬 Instagram: [{target_media.code}] ga izoh qoldirildi (#{current_hashtag}).")
+                    
+                    if target_media.id not in processed_reels:
+                        processed_reels.append(target_media.id)
+                    
+                    # Xotirani tozalab borish
+                    if len(processed_reels) > 200: 
+                        processed_reels.pop(0) 
+                    
+                    # Birinchisiga yozgach, ikkinchisiga o'tishdan oldin 3 soniya kutish
+                    if idx == 0:
+                        time.sleep(3)
 
                 # ANIQ 10 DAQIQA KUTISH (600 soniya)
                 print("💤 10 daqiqa tanaffus...")
