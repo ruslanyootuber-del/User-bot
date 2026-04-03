@@ -1,4 +1,4 @@
-Main.py import os
+import os
 import asyncio
 import random
 from pyrogram import Client
