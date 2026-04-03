@@ -19,7 +19,7 @@ async def main():
     async with app:
         # Guruhlar ro'yxati
         groups = [
-            "@w_2008_2009_2007", "@real_qizlarbore", "@tanishuvlar_ovozli_chat_gruppa", "@ajrashganlar_tanishaaa", "@Samarqand_chat_Qashqadaryo", "@TANSHUVLAR_QADIRDONLARIM"
+            "@w_2008_2009_2007", "@tungi_opalarn", "@gulimsanu_9", "@silbek_1110", "@real_qizlarbore", "@tanishuvlar_ovozli_chat_gruppa", "@ajrashganlar_tanishaaa", "@Samarqand_chat_Qashqadaryo", "@TANSHUVLAR_QADIRDONLARIM"
         ]
         
         # 3 xil matnli xabarlar ro'yxati
