@@ -38,7 +38,7 @@ async def main():
         # Javob berilgan odamlar xotirasi
         replied_users = {group: [] for group in groups}
         
-        print("Bot ishga tushdi. Random xabarlar va 5 daqiqalik tanaffus faol! ✅")
+        print("Bot ishga tushdi. Random xabarlar va 6 daqiqalik tanaffus faol! ✅")
         
         while True:
             for group in groups:
@@ -79,9 +79,9 @@ async def main():
                 # Guruhlar orasida 3 soniya kutish
                 await asyncio.sleep(3)
             
-            print("Sikl tugadi. 10 daqiqa (600 sek) tanaffus boshlandi... 💤")
-            # 5 daqiqalik tanaffus (300 soniya)
-            await asyncio.sleep(300)
+            print("Sikl tugadi. 6 daqiqa (360 sek) tanaffus boshlandi... 💤")
+            # 5 daqiqalik tanaffus (360 soniya)
+            await asyncio.sleep(360)
 
 if __name__ == "__main__":
     try:
